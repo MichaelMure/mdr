@@ -1,0 +1,63 @@
+# github.com/MichaelMure/go-term-markdown v0.0.0-20190720125214-3128116da3cc
+github.com/MichaelMure/go-term-markdown
+# github.com/MichaelMure/go-term-text v0.1.1-0.20190717181658-6dbdb6381e67
+github.com/MichaelMure/go-term-text
+# github.com/MichaelMure/gocui v0.4.0
+github.com/MichaelMure/gocui
+# github.com/alecthomas/chroma v0.6.6
+github.com/alecthomas/chroma
+github.com/alecthomas/chroma/formatters
+github.com/alecthomas/chroma/lexers
+github.com/alecthomas/chroma/styles
+github.com/alecthomas/chroma/formatters/html
+github.com/alecthomas/chroma/lexers/a
+github.com/alecthomas/chroma/lexers/b
+github.com/alecthomas/chroma/lexers/c
+github.com/alecthomas/chroma/lexers/circular
+github.com/alecthomas/chroma/lexers/d
+github.com/alecthomas/chroma/lexers/e
+github.com/alecthomas/chroma/lexers/f
+github.com/alecthomas/chroma/lexers/g
+github.com/alecthomas/chroma/lexers/h
+github.com/alecthomas/chroma/lexers/i
+github.com/alecthomas/chroma/lexers/internal
+github.com/alecthomas/chroma/lexers/j
+github.com/alecthomas/chroma/lexers/k
+github.com/alecthomas/chroma/lexers/l
+github.com/alecthomas/chroma/lexers/m
+github.com/alecthomas/chroma/lexers/n
+github.com/alecthomas/chroma/lexers/o
+github.com/alecthomas/chroma/lexers/p
+github.com/alecthomas/chroma/lexers/q
+github.com/alecthomas/chroma/lexers/r
+github.com/alecthomas/chroma/lexers/s
+github.com/alecthomas/chroma/lexers/t
+github.com/alecthomas/chroma/lexers/v
+github.com/alecthomas/chroma/lexers/w
+github.com/alecthomas/chroma/lexers/x
+github.com/alecthomas/chroma/lexers/y
+# github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964
+github.com/danwakefield/fnmatch
+# github.com/dlclark/regexp2 v1.1.8
+github.com/dlclark/regexp2
+github.com/dlclark/regexp2/syntax
+# github.com/fatih/color v1.7.0
+github.com/fatih/color
+# github.com/kyokomi/emoji v2.1.0+incompatible
+github.com/kyokomi/emoji
+# github.com/mattn/go-colorable v0.1.2
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.8
+github.com/mattn/go-isatty
+# github.com/mattn/go-runewidth v0.0.4
+github.com/mattn/go-runewidth
+# github.com/nsf/termbox-go v0.0.0-20190624072549-eeb6cd0a1762
+github.com/nsf/termbox-go
+# github.com/pkg/errors v0.8.1
+github.com/pkg/errors
+# github.com/russross/blackfriday v2.0.0+incompatible
+github.com/russross/blackfriday
+# github.com/shurcooL/sanitized_anchor_name v1.0.0
+github.com/shurcooL/sanitized_anchor_name
+# golang.org/x/sys v0.0.0-20190712062909-fae7ac547cb7
+golang.org/x/sys/unix
