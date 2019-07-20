@@ -13,6 +13,14 @@ import (
 const padding = 4
 
 func main() {
+	if len(os.Args) < 2 {
+		exitError(fmt.Errorf("filename required"))
+	}
+
+	if len(os.Args) > 2 {
+		exitError(fmt.Errorf("only one file is supported"))
+	}
+
 	g, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		exitError(errors.Wrap(err, "error starting the interactive UI"))
@@ -24,7 +32,7 @@ func main() {
 		exitError(err)
 	}
 
-	err = ui.loadFile("example.md")
+	err = ui.loadFile(os.Args[1])
 	if err != nil {
 		exitError(errors.Wrap(err, "error reading file"))
 	}
