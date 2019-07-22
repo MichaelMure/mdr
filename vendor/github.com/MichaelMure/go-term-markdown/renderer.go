@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"strings"
+	"unicode"
 
 	"github.com/MichaelMure/go-term-text"
 	"github.com/alecthomas/chroma"
@@ -292,9 +293,12 @@ func (r *renderer) RenderNode(w io.Writer, node *blackfriday.Node, entering bool
 	case blackfriday.Image:
 
 	case blackfriday.Text:
-		cleaned := strings.ReplaceAll(string(node.Literal), "\n", "")
+		content := string(node.Literal)
+		if shouldCleanText(node) {
+			content = removeLineBreak(content)
+		}
 		// emoji support !
-		emojed := emoji.Sprint(cleaned)
+		emojed := emoji.Sprint(content)
 		r.inlineAccumulator.WriteString(emojed)
 
 	case blackfriday.HTMLBlock:
@@ -415,4 +419,41 @@ func (r *renderer) renderFormattedCodeBlock(w io.Writer, code string) {
 	_, _ = fmt.Fprint(w, output)
 
 	_, _ = fmt.Fprintf(w, "\n\n")
+}
+
+func removeLineBreak(text string) string {
+	lines := strings.Split(text, "\n")
+
+	if len(lines) <= 1 {
+		return text
+	}
+
+	for i, l := range lines {
+		switch i {
+		case 0:
+			lines[i] = strings.TrimRightFunc(l, unicode.IsSpace)
+		case len(lines) - 1:
+			lines[i] = strings.TrimLeftFunc(l, unicode.IsSpace)
+		default:
+			lines[i] = strings.TrimFunc(l, unicode.IsSpace)
+		}
+	}
+	return strings.Join(lines, " ")
+}
+
+func shouldCleanText(node *blackfriday.Node) bool {
+	for node != nil {
+		switch node.Type {
+		case blackfriday.BlockQuote:
+			return false
+
+		case blackfriday.Heading, blackfriday.Image, blackfriday.Link,
+			blackfriday.TableCell, blackfriday.Document, blackfriday.Item:
+			return true
+		}
+
+		node = node.Parent
+	}
+
+	panic("bad markdown document or missing case")
 }

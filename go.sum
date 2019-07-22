@@ -4,6 +4,8 @@ github.com/MichaelMure/go-term-markdown v0.0.0-20190720111404-434ad1b1149f h1:OQ
 github.com/MichaelMure/go-term-markdown v0.0.0-20190720111404-434ad1b1149f/go.mod h1:ffYullM5oilQyjXtJhjyFxwRhwWAmrEc5L7nd11sNmU=
 github.com/MichaelMure/go-term-markdown v0.0.0-20190720125214-3128116da3cc h1:R5lgsz8VrxJnjg6U47t6sxO8hgsFB7Jfdhr5+Xw8Vck=
 github.com/MichaelMure/go-term-markdown v0.0.0-20190720125214-3128116da3cc/go.mod h1:ffYullM5oilQyjXtJhjyFxwRhwWAmrEc5L7nd11sNmU=
+github.com/MichaelMure/go-term-markdown v0.0.0-20190722140716-26a0d9ae2ce1 h1:Mz9AwdZaRNgFubC3QM1DEjlpnLzcC5NlL3v0dmjQ0Ws=
+github.com/MichaelMure/go-term-markdown v0.0.0-20190722140716-26a0d9ae2ce1/go.mod h1:ffYullM5oilQyjXtJhjyFxwRhwWAmrEc5L7nd11sNmU=
 github.com/MichaelMure/go-term-text v0.1.1-0.20190717181658-6dbdb6381e67 h1:D2bjmiVeCepObQbfN/lR+TFEiJ2lTZOIjOA1C9yQ8sA=
 github.com/MichaelMure/go-term-text v0.1.1-0.20190717181658-6dbdb6381e67/go.mod h1:1N3lVD/geeO4yB1wknjjR0UCeGezWWRXEBKyIwcKkZY=
 github.com/MichaelMure/gocui v0.4.0 h1:C82Wd6bkl7LxHMF4Pi8Dm7PSRHkdj96ymSZZxhC9ulI=

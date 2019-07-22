@@ -3,7 +3,7 @@ module github.com/MichaelMure/mdr
 go 1.12
 
 require (
-	github.com/MichaelMure/go-term-markdown v0.0.0-20190720125214-3128116da3cc
+	github.com/MichaelMure/go-term-markdown v0.0.0-20190722140716-26a0d9ae2ce1
 	github.com/MichaelMure/gocui v0.4.0
 	github.com/alecthomas/chroma v0.6.6 // indirect
 	github.com/alecthomas/repr v0.0.0-20181024024818-d37bc2a10ba1 // indirect

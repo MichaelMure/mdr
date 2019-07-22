@@ -1,4 +1,4 @@
-# github.com/MichaelMure/go-term-markdown v0.0.0-20190720125214-3128116da3cc
+# github.com/MichaelMure/go-term-markdown v0.0.0-20190722140716-26a0d9ae2ce1
 github.com/MichaelMure/go-term-markdown
 # github.com/MichaelMure/go-term-text v0.1.1-0.20190717181658-6dbdb6381e67
 github.com/MichaelMure/go-term-text
