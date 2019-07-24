@@ -13,11 +13,23 @@ import (
 const padding = 4
 
 func main() {
-	if len(os.Args) < 2 {
-		exitError(fmt.Errorf("filename required"))
-	}
+	var content []byte
 
-	if len(os.Args) > 2 {
+	switch len(os.Args) {
+	case 1:
+		data, err := ioutil.ReadAll(os.Stdin)
+		if err != nil {
+			exitError(errors.Wrap(err, "error while reading STDIN"))
+		}
+		content = data
+	case 2:
+		data, err := ioutil.ReadFile(os.Args[1])
+		if err != nil {
+			exitError(errors.Wrap(err, "error while reading file"))
+		}
+		content = data
+
+	default:
 		exitError(fmt.Errorf("only one file is supported"))
 	}
 
@@ -32,10 +44,7 @@ func main() {
 		exitError(err)
 	}
 
-	err = ui.loadFile(os.Args[1])
-	if err != nil {
-		exitError(errors.Wrap(err, "error reading file"))
-	}
+	ui.setContent(content)
 
 	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
 		exitError(err)
@@ -117,15 +126,9 @@ func newUi(g *gocui.Gui) (*ui, error) {
 	return result, nil
 }
 
-func (ui *ui) loadFile(path string) error {
-	raw, err := ioutil.ReadFile(path)
-	if err != nil {
-		return err
-	}
-
-	ui.raw = string(raw)
+func (ui *ui) setContent(content []byte) {
+	ui.raw = string(content)
 	ui.width = -1
-	return nil
 }
 
 func (ui *ui) layout(g *gocui.Gui) error {
