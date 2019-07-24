@@ -1,6 +1,6 @@
 module github.com/MichaelMure/mdr
 
-go 1.11
+go 1.12
 
 require (
 	github.com/MichaelMure/go-term-markdown v0.0.0-20190724185251-8c4898998f89
