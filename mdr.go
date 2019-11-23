@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 
 	"github.com/MichaelMure/go-term-markdown"
 	"github.com/awesome-gocui/gocui"
@@ -30,6 +31,10 @@ func main() {
 		data, err := ioutil.ReadFile(os.Args[1])
 		if err != nil {
 			exitError(errors.Wrap(err, "error while reading file"))
+		}
+		err = os.Chdir(path.Dir(os.Args[1]))
+		if err != nil {
+			exitError(err)
 		}
 		content = data
 
@@ -152,7 +157,13 @@ func (ui *ui) layout(g *gocui.Gui) error {
 
 func (ui *ui) render(g *gocui.Gui) []byte {
 	maxX, _ := g.Size()
-	rendered := markdown.Render(ui.raw, maxX-1-padding, padding)
+
+	opts := []markdown.Options{
+		// needed when going through gocui
+		markdown.WithImageDithering(markdown.DitheringWithBlocks),
+	}
+
+	rendered := markdown.Render(ui.raw, maxX-1-padding, padding, opts...)
 	ui.lines = 0
 	for _, b := range rendered {
 		if b == '\n' {

@@ -2,6 +2,8 @@ github.com/GeertJohan/go.incremental v1.0.0/go.mod h1:6fAjUhbVuX1KcMD3c8TEgVUqmo
 github.com/GeertJohan/go.rice v1.0.0/go.mod h1:eH6gbSOAUv07dQuZVnBmoDP8mgsM1rtixis4Tib9if0=
 github.com/MichaelMure/go-term-markdown v0.0.0-20191123220412-7c8717fe60b9 h1:P0rAeOsd1ceUMx52JSyh/sXTzOPz0I9La34rJKrAA7k=
 github.com/MichaelMure/go-term-markdown v0.0.0-20191123220412-7c8717fe60b9/go.mod h1:BwI1DYmYkEcaD98TuJN5y3CupnQ4Qjvv4x3g2Qh0yXk=
+github.com/MichaelMure/go-term-markdown v0.0.0-20191123232303-eda6491f3738 h1:aI1p3Hzj7imnDxRLKHnINezqqt0pxrMkICdmWGEvDaE=
+github.com/MichaelMure/go-term-markdown v0.0.0-20191123232303-eda6491f3738/go.mod h1:BwI1DYmYkEcaD98TuJN5y3CupnQ4Qjvv4x3g2Qh0yXk=
 github.com/MichaelMure/go-term-text v0.2.1 h1:6axyQDcdH8haB+TuxnhXzkvIO+JrQL1sZtGB1vC62zs=
 github.com/MichaelMure/go-term-text v0.2.1/go.mod h1:vgMpuXPXAhBYN8buVKg8XrLVQ5xp6JYRRZs8bnmPa0I=
 github.com/akavel/rsrc v0.8.0/go.mod h1:uLoCtb9J+EyAqh+26kdrTgmzRBFPGOolLWKpdxkKq+c=
