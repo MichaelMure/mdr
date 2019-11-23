@@ -6,7 +6,8 @@ import (
 	"os"
 
 	"github.com/MichaelMure/go-term-markdown"
-	"github.com/MichaelMure/gocui"
+	"github.com/awesome-gocui/gocui"
+	"github.com/mattn/go-isatty"
 	"github.com/pkg/errors"
 )
 
@@ -17,6 +18,9 @@ func main() {
 
 	switch len(os.Args) {
 	case 1:
+		if isatty.IsTerminal(os.Stdout.Fd()) {
+			exitError(fmt.Errorf("usage: %s <file.md>", os.Args[0]))
+		}
 		data, err := ioutil.ReadAll(os.Stdin)
 		if err != nil {
 			exitError(errors.Wrap(err, "error while reading STDIN"))
@@ -33,7 +37,7 @@ func main() {
 		exitError(fmt.Errorf("only one file is supported"))
 	}
 
-	g, err := gocui.NewGui(gocui.OutputNormal)
+	g, err := gocui.NewGui(gocui.OutputNormal, false)
 	if err != nil {
 		exitError(errors.Wrap(err, "error starting the interactive UI"))
 	}
@@ -80,48 +84,36 @@ func newUi(g *gocui.Gui) (*ui, error) {
 	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, result.quit); err != nil {
 		return nil, err
 	}
-	if err := g.SetKeybinding("", 'q', gocui.ModNone, result.quit); err != nil {
+	if err := g.SetKeybinding(renderView, 'q', gocui.ModNone, result.quit); err != nil {
 		return nil, err
 	}
 
 	// Up
-	if err := g.SetKeybinding("", 'k', gocui.ModNone, result.up); err != nil {
+	if err := g.SetKeybinding(renderView, 'k', gocui.ModNone, result.up); err != nil {
 		return nil, err
 	}
-	if err := g.SetKeybinding("", gocui.KeyArrowUp, gocui.ModNone, result.up); err != nil {
+	if err := g.SetKeybinding(renderView, gocui.KeyArrowUp, gocui.ModNone, result.up); err != nil {
 		return nil, err
 	}
 	// Down
-	if err := g.SetKeybinding("", 'j', gocui.ModNone, result.down); err != nil {
+	if err := g.SetKeybinding(renderView, 'j', gocui.ModNone, result.down); err != nil {
 		return nil, err
 	}
-	if err := g.SetKeybinding("", gocui.KeyArrowDown, gocui.ModNone, result.down); err != nil {
+	if err := g.SetKeybinding(renderView, gocui.KeyArrowDown, gocui.ModNone, result.down); err != nil {
 		return nil, err
 	}
 
 	// PageUp
-	if err := g.SetKeybinding("", gocui.KeyPgup, gocui.ModNone, result.pageUp); err != nil {
+	if err := g.SetKeybinding(renderView, gocui.KeyPgup, gocui.ModNone, result.pageUp); err != nil {
 		return nil, err
 	}
 	// PageDown
-	if err := g.SetKeybinding("", gocui.KeyPgdn, gocui.ModNone, result.pageDown); err != nil {
+	if err := g.SetKeybinding(renderView, gocui.KeyPgdn, gocui.ModNone, result.pageDown); err != nil {
 		return nil, err
 	}
-
-	// // Left
-	// if err := g.SetKeybinding("", 'h', gocui.ModNone, result.left); err != nil {
-	// 	return nil, err
-	// }
-	// if err := g.SetKeybinding("", gocui.KeyArrowLeft, gocui.ModNone, result.left); err != nil {
-	// 	return nil, err
-	// }
-	// // Right
-	// if err := g.SetKeybinding("", 'l', gocui.ModNone, result.right); err != nil {
-	// 	return nil, err
-	// }
-	// if err := g.SetKeybinding("", gocui.KeyArrowRight, gocui.ModNone, result.right); err != nil {
-	// 	return nil, err
-	// }
+	if err := g.SetKeybinding(renderView, gocui.KeySpace, gocui.ModNone, result.pageDown); err != nil {
+		return nil, err
+	}
 
 	return result, nil
 }
@@ -134,9 +126,9 @@ func (ui *ui) setContent(content []byte) {
 func (ui *ui) layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
 
-	v, err := g.SetView(renderView, ui.XOffset, -ui.YOffset, maxX, maxY)
+	v, err := g.SetView(renderView, ui.XOffset, -ui.YOffset, maxX, maxY, 0)
 	if err != nil {
-		if err != gocui.ErrUnknownView {
+		if !gocui.IsUnknownView(err) {
 			return err
 		}
 
@@ -148,6 +140,11 @@ func (ui *ui) layout(g *gocui.Gui) error {
 		ui.width = maxX
 		v.Clear()
 		_, _ = v.Write(ui.render(g))
+	}
+
+	_, err = g.SetCurrentView(renderView)
+	if err != nil {
+		return err
 	}
 
 	return nil
@@ -197,16 +194,6 @@ func (ui *ui) pageDown(g *gocui.Gui, v *gocui.View) error {
 	ui.YOffset = max(ui.YOffset, 0)
 	return nil
 }
-
-// func (ui *ui) left(g *gocui.Gui, v *gocui.View) error {
-// 	ui.XOffset += 1
-// 	return nil
-// }
-//
-// func (ui *ui) right(g *gocui.Gui, v *gocui.View) error {
-// 	ui.XOffset -= 1
-// 	return nil
-// }
 
 func min(a, b int) int {
 	if a < b {
