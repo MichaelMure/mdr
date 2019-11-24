@@ -17,7 +17,7 @@ Note: Markdown being originally designed to render as HTML, rendering in a termi
 
 ## Installation
 
-You can grab a [pre-compiled binary](https://github.com/MichaelMure/mdr/releases/latest)
+You can grab a [pre-compiled binary](https://github.com/MichaelMure/mdr/releases/latest).
 
 ## Keybindings
 
