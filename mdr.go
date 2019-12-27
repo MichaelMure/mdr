@@ -97,11 +97,17 @@ func newUi(g *gocui.Gui) (*ui, error) {
 	if err := g.SetKeybinding(renderView, 'k', gocui.ModNone, result.up); err != nil {
 		return nil, err
 	}
+	if err := g.SetKeybinding(renderView, gocui.KeyCtrlP, gocui.ModNone, result.up); err != nil {
+		return nil, err
+	}
 	if err := g.SetKeybinding(renderView, gocui.KeyArrowUp, gocui.ModNone, result.up); err != nil {
 		return nil, err
 	}
 	// Down
 	if err := g.SetKeybinding(renderView, 'j', gocui.ModNone, result.down); err != nil {
+		return nil, err
+	}
+	if err := g.SetKeybinding(renderView, gocui.KeyCtrlN, gocui.ModNone, result.down); err != nil {
 		return nil, err
 	}
 	if err := g.SetKeybinding(renderView, gocui.KeyArrowDown, gocui.ModNone, result.down); err != nil {
