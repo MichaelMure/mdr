@@ -19,7 +19,7 @@ func main() {
 
 	switch len(os.Args) {
 	case 1:
-		if isatty.IsTerminal(os.Stdout.Fd()) {
+		if isatty.IsTerminal(os.Stdin.Fd()) {
 			exitError(fmt.Errorf("usage: %s <file.md>", os.Args[0]))
 		}
 		data, err := ioutil.ReadAll(os.Stdin)
