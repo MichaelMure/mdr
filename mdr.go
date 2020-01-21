@@ -15,6 +15,11 @@ import (
 const padding = 4
 
 func main() {
+	if len(os.Args) >= 2 && (os.Args[1] == "version" || os.Args[1] == "--version") {
+		printVersion()
+		return
+	}
+
 	var content []byte
 
 	switch len(os.Args) {
