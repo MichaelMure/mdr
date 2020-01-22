@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/MichaelMure/go-term-markdown"
+	markdown "github.com/MichaelMure/go-term-markdown"
 	"github.com/awesome-gocui/gocui"
 	"github.com/mattn/go-isatty"
 	"github.com/pkg/errors"
@@ -123,8 +123,14 @@ func newUi(g *gocui.Gui) (*ui, error) {
 	if err := g.SetKeybinding(renderView, gocui.KeyPgup, gocui.ModNone, result.pageUp); err != nil {
 		return nil, err
 	}
+	if err := g.SetKeybinding(renderView, gocui.KeyCtrlU, gocui.ModNone, result.pageUp); err != nil {
+		return nil, err
+	}
 	// PageDown
 	if err := g.SetKeybinding(renderView, gocui.KeyPgdn, gocui.ModNone, result.pageDown); err != nil {
+		return nil, err
+	}
+	if err := g.SetKeybinding(renderView, gocui.KeyCtrlD, gocui.ModNone, result.pageDown); err != nil {
 		return nil, err
 	}
 	if err := g.SetKeybinding(renderView, gocui.KeySpace, gocui.ModNone, result.pageDown); err != nil {
