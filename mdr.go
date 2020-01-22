@@ -237,7 +237,7 @@ func (ui *ui) pageTop(g *gocui.Gui, v *gocui.View) error {
 
 func (ui *ui) pageBottom(g *gocui.Gui, v *gocui.View) error {
 	_, maxY := g.Size()
-	ui.YOffset = min(maxY, ui.lines-maxY+1)
+	ui.YOffset = max(maxY, ui.lines-maxY+1)
 	return nil
 }
 
