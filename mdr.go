@@ -137,6 +137,13 @@ func newUi(g *gocui.Gui) (*ui, error) {
 		return nil, err
 	}
 
+	if err := g.SetKeybinding(renderView, 'g', gocui.ModNone, result.pageTop); err != nil {
+		return nil, err
+	}
+	if err := g.SetKeybinding(renderView, 'G', gocui.ModNone, result.pageBottom); err != nil {
+		return nil, err
+	}
+
 	return result, nil
 }
 
@@ -220,6 +227,17 @@ func (ui *ui) pageDown(g *gocui.Gui, v *gocui.View) error {
 	ui.YOffset += maxY / 2
 	ui.YOffset = min(ui.YOffset, ui.lines-maxY+1)
 	ui.YOffset = max(ui.YOffset, 0)
+	return nil
+}
+
+func (ui *ui) pageTop(g *gocui.Gui, v *gocui.View) error {
+	ui.YOffset = 0
+	return nil
+}
+
+func (ui *ui) pageBottom(g *gocui.Gui, v *gocui.View) error {
+	_, maxY := g.Size()
+	ui.YOffset = min(maxY, ui.lines-maxY+1)
 	return nil
 }
 
