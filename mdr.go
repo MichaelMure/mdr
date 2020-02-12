@@ -73,6 +73,8 @@ func exitError(err error) {
 const renderView = "render"
 
 type ui struct {
+	keybindings []keybinding
+
 	raw string
 	// current width of the view
 	width   int
@@ -90,45 +92,25 @@ func newUi(g *gocui.Gui) (*ui, error) {
 
 	g.SetManagerFunc(result.layout)
 
-	// Quit
-	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, result.quit); err != nil {
-		return nil, err
-	}
-	if err := g.SetKeybinding(renderView, 'q', gocui.ModNone, result.quit); err != nil {
-		return nil, err
-	}
-
-	// Up
-	if err := g.SetKeybinding(renderView, 'k', gocui.ModNone, result.up); err != nil {
-		return nil, err
-	}
-	if err := g.SetKeybinding(renderView, gocui.KeyCtrlP, gocui.ModNone, result.up); err != nil {
-		return nil, err
-	}
-	if err := g.SetKeybinding(renderView, gocui.KeyArrowUp, gocui.ModNone, result.up); err != nil {
-		return nil, err
-	}
-	// Down
-	if err := g.SetKeybinding(renderView, 'j', gocui.ModNone, result.down); err != nil {
-		return nil, err
-	}
-	if err := g.SetKeybinding(renderView, gocui.KeyCtrlN, gocui.ModNone, result.down); err != nil {
-		return nil, err
-	}
-	if err := g.SetKeybinding(renderView, gocui.KeyArrowDown, gocui.ModNone, result.down); err != nil {
-		return nil, err
+	result.keybindings = []keybinding{
+		{"", gocui.KeyCtrlC, gocui.ModNone, result.quit},
+		{renderView, 'q', gocui.ModNone, result.quit},
+		{renderView, 'k', gocui.ModNone, result.up},
+		{renderView, gocui.KeyCtrlP, gocui.ModNone, result.up},
+		{renderView, gocui.KeyArrowUp, gocui.ModNone, result.up},
+		{renderView, 'j', gocui.ModNone, result.down},
+		{renderView, gocui.KeyCtrlN, gocui.ModNone, result.down},
+		{renderView, gocui.KeyArrowDown, gocui.ModNone, result.down},
+		{renderView, gocui.KeyPgup, gocui.ModNone, result.pageUp},
+		{renderView, gocui.KeyPgdn, gocui.ModNone, result.pageDown},
+		{renderView, gocui.KeySpace, gocui.ModNone, result.pageDown},
 	}
 
-	// PageUp
-	if err := g.SetKeybinding(renderView, gocui.KeyPgup, gocui.ModNone, result.pageUp); err != nil {
-		return nil, err
-	}
-	// PageDown
-	if err := g.SetKeybinding(renderView, gocui.KeyPgdn, gocui.ModNone, result.pageDown); err != nil {
-		return nil, err
-	}
-	if err := g.SetKeybinding(renderView, gocui.KeySpace, gocui.ModNone, result.pageDown); err != nil {
-		return nil, err
+	for _, kb := range result.keybindings {
+		err := kb.Register(g)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return result, nil
