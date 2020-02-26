@@ -9,6 +9,6 @@ require (
 	github.com/awesome-gocui/gocui v0.6.0
 	github.com/dlclark/regexp2 v1.1.8 // indirect
 	github.com/mattn/go-colorable v0.1.2 // indirect
-	github.com/mattn/go-isatty v0.0.10
+	github.com/mattn/go-isatty v0.0.12
 	github.com/pkg/errors v0.8.1
 )
