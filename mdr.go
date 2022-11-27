@@ -101,7 +101,9 @@ func newUi(g *gocui.Gui) (*ui, error) {
 		{renderView, 'j', gocui.ModNone, result.down},
 		{renderView, gocui.KeyCtrlN, gocui.ModNone, result.down},
 		{renderView, gocui.KeyArrowDown, gocui.ModNone, result.down},
+		{renderView, 'u', gocui.ModNone, result.pageUp},
 		{renderView, gocui.KeyPgup, gocui.ModNone, result.pageUp},
+		{renderView, 'd', gocui.ModNone, result.pageDown},
 		{renderView, gocui.KeyPgdn, gocui.ModNone, result.pageDown},
 		{renderView, gocui.KeySpace, gocui.ModNone, result.pageDown},
 	}
